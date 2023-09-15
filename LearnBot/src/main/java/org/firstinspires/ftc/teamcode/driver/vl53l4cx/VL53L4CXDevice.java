@@ -3,6 +3,9 @@ package org.firstinspires.ftc.teamcode.driver.vl53l4cx;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchDevice;
 
+/*
+https://github.com/FIRST-Tech-Challenge/ftcrobotcontroller/wiki/Writing-an-I2C-Driver
+ */
 public class VL53L4CXDevice extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
     protected VL53L4CXDevice(I2cDeviceSynch deviceClient, boolean deviceClientIsOwned) {
