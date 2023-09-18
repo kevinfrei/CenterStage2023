@@ -10,7 +10,6 @@ public class VL53L4CXDevice extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
     protected VL53L4CXDevice(I2cDeviceSynch deviceClient, boolean deviceClientIsOwned) {
         super(deviceClient, deviceClientIsOwned);
-
         super.registerArmingStateCallback(false);
         this.deviceClient.engage();
     }
