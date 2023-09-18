@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.driver.as5600;
+package org.firstinspires.ftc.learnbot.devicedrivers.as5600;
 
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;

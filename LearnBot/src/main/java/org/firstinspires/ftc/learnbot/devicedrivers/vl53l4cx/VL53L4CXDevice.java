@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.driver.vl53l4cx;
+package org.firstinspires.ftc.learnbot.devicedrivers.vl53l4cx;
 
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchDevice;
