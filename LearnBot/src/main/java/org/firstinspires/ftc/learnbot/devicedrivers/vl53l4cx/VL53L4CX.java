@@ -232,10 +232,10 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
          * @} VL53L4CX_define_Error_group
          */
 
-        public int bVal;
+        public byte bVal;
 
         Error(int bVal) {
-            this.bVal = bVal;
+            this.bVal = (byte) bVal;
         }
     }
 
@@ -243,114 +243,114 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
     static final byte SPI =                     0x00;
 
 
-
-
-
-    enum WaitMethod {
+    public enum WaitMethod {
         BLOCKING(0),
         NON_BLOCKING(1);
-        public int bVal;
-        WaitMethod(int bVal) {
-            this.bVal = bVal;
-        }
-        }
-
-
-
-    enum DeviceState {
-
-        POWERDOWN( 0),
-
-        HW_STANDBY(  1),
-
-        FW_COLDBOOT(  2),
-
-        SW_STANDBY(  3),
-
-        RANGING_DSS_AUTO(  4),
-
-        RANGING_DSS_MANUAL(  5),
-
-        RANGING_WAIT_GPH_SYNC(  6),
-
-        RANGING_GATHER_DATA(  7),
-
-        RANGING_OUTPUT_DATA(  8),
-
-        UNKNOWN( 98),
-
-        ERROR( 99);
-
-        public int bVal;
-
-        DeviceState(int bVal) {
-            this.bVal = bVal;
-        }
-        }
-
-    // typedef uint8_t VL53L4CX_DeviceZonePreset;
-
-
-    enum DevicePresetModes {
-        NONE(0),
-        HISTOGRAM_LONG_RANGE                (27),
-        HISTOGRAM_MEDIUM_RANGE                (30),
-        HISTOGRAM_SHORT_RANGE                (33);
         public byte bVal;
 
-        DevicePresetModes(byte bVal) {
-            this.bVal = bVal;
+        WaitMethod(int bVal) {
+            this.bVal = (byte) bVal;
         }
     }
 
 
+    public enum DeviceState {
+
+        POWERDOWN(0),
+
+        HW_STANDBY(1),
+
+        FW_COLDBOOT(2),
+
+        SW_STANDBY(3),
+
+        RANGING_DSS_AUTO(4),
+
+        RANGING_DSS_MANUAL(5),
+
+        RANGING_WAIT_GPH_SYNC(6),
+
+        RANGING_GATHER_DATA(7),
+
+        RANGING_OUTPUT_DATA(8),
+
+        UNKNOWN(98),
+
+        ERROR(99);
+
+        public byte bVal;
+
+        DeviceState(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
+
+    public enum DeviceZonePreset {
+        dunno(0);
+        public byte bVal;
+
+        DeviceZonePreset(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
 
 
-    typedef uint8_t VL53L4CX_DeviceMeasurementModes;
+    public enum DevicePresetModes {
+        NONE(0),
+        HISTOGRAM_LONG_RANGE(27),
+        HISTOGRAM_MEDIUM_RANGE(30),
+        HISTOGRAM_SHORT_RANGE(33);
+        public byte bVal;
 
-#define VL53L4CX_DEVICEMEASUREMENTMODE_STOP
-            ((VL53L4CX_DeviceMeasurementModes)  0x00)
-            #define VL53L4CX_DEVICEMEASUREMENTMODE_SINGLESHOT
-            ((VL53L4CX_DeviceMeasurementModes)  0x10)
-            #define VL53L4CX_DEVICEMEASUREMENTMODE_BACKTOBACK
-            ((VL53L4CX_DeviceMeasurementModes)  0x20)
-            #define VL53L4CX_DEVICEMEASUREMENTMODE_TIMED
-            ((VL53L4CX_DeviceMeasurementModes)  0x40)
-            #define VL53L4CX_DEVICEMEASUREMENTMODE_ABORT
-            ((VL53L4CX_DeviceMeasurementModes)  0x80)
-
+        DevicePresetModes(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
 
 
+    public enum DeviceMeasurementModes {
+
+        STOP(0x00),
+        SINGLESHOT(0x10),
+        BACKTOBACK(0x20),
+        TIMED(0x40),
+        ABORT(0x80);
+        public byte bVal;
+
+        DeviceMeasurementModes(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
 
 
-    typedef uint8_t VL53L4CX_OffsetCalibrationMode;
+    public enum OffsetCalibrationMode {
 
-#define VL53L4CX_OFFSETCALIBRATIONMODE__NONE
-            ((VL53L4CX_OffsetCalibrationMode)  0)
-            #define VL53L4CX_OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD
-            ((VL53L4CX_OffsetCalibrationMode)  1)
-            #define VL53L4CX_OFFSETCALIBRATIONMODE__MM1_MM2__HISTOGRAM
-            ((VL53L4CX_OffsetCalibrationMode)  2)
-            #define VL53L4CX_OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD_PRE_RANGE_ONLY
-            ((VL53L4CX_OffsetCalibrationMode)  3)
-            #define VL53L4CX_OFFSETCALIBRATIONMODE__MM1_MM2__HISTOGRAM_PRE_RANGE_ONLY
-            ((VL53L4CX_OffsetCalibrationMode)  4)
+        NONE(0),
+        MM1_MM2__STANDARD(1),
+        MM1_MM2__HISTOGRAM(2),
+        MM1_MM2__STANDARD_PRE_RANGE_ONLY(3),
+        MM1_MM2__HISTOGRAM_PRE_RANGE_ONLY(4);
+        public byte bVal;
 
-
-
+        OffsetCalibrationMode(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
 
 
-    typedef uint8_t VL53L4CX_OffsetCorrectionMode;
+    public enum OffsetCorrectionMode {
 
-#define VL53L4CX_OFFSETCORRECTIONMODE__NONE
-            ((VL53L4CX_OffsetCorrectionMode)  0)
-            #define VL53L4CX_OFFSETCORRECTIONMODE__MM1_MM2_OFFSETS
-            ((VL53L4CX_OffsetCorrectionMode)  1)
-            #define VL53L4CX_OFFSETCORRECTIONMODE__PER_VCSEL_OFFSETS
-            ((VL53L4CX_OffsetCorrectionMode)  3)
+        NONE(0),
+        MM1_MM2_OFFSETS(1),
+        PER_VCSEL_OFFSETS(3);
+        public byte bVal;
 
+        OffsetCorrectionMode(int bVal) {
+            this.bVal = (byte) bVal;
+        }
+    }
 
-
+/*
 
 
     typedef uint8_t VL53L4CX_DeviceDmaxMode;
@@ -1175,132 +1175,131 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
 
 
-
+*/
 
 
     class LLDriverData_t {
 
-        byte   wait_method;
+        byte wait_method;
 
-        DevicePresetModes        preset_mode;
+        DevicePresetModes preset_mode;
 
-        DeviceZonePreset         zone_preset;
+        DeviceZonePreset zone_preset;
 
-        DeviceMeasurementModes   measurement_mode;
+        DeviceMeasurementModes measurement_mode;
 
-        OffsetCalibrationMode    offset_calibration_mode;
+        OffsetCalibrationMode offset_calibration_mode;
 
-        OffsetCorrectionMode     offset_correction_mode;
+        OffsetCorrectionMode offset_correction_mode;
 
-        DeviceDmaxMode           dmax_mode;
+        DeviceDmaxMode dmax_mode;
 
-        int  phasecal_config_timeout_us;
+        int phasecal_config_timeout_us;
 
-        int  mm_config_timeout_us;
+        int mm_config_timeout_us;
 
-        int  range_config_timeout_us;
+        int range_config_timeout_us;
 
-        int  inter_measurement_period_ms;
+        int inter_measurement_period_ms;
 
-        short  dss_config__target_total_rate_mcps;
+        short dss_config__target_total_rate_mcps;
 
-        int  fw_ready_poll_duration_ms;
+        int fw_ready_poll_duration_ms;
 
-        byte   fw_ready;
+        byte fw_ready;
 
-        byte   debug_mode;
+        byte debug_mode;
 
-        ll_version_t                 version;
-
-
-        ll_driver_state_t            ll_state;
+        ll_version_t version;
 
 
-        GPIO_interrupt_config_t      gpio_interrupt_config;
+        ll_driver_state_t ll_state;
 
 
-        customer_nvm_managed_t       customer;
-        cal_peak_rate_map_t          cal_peak_rate_map;
+        GPIO_interrupt_config_t gpio_interrupt_config;
+
+
+        customer_nvm_managed_t customer;
+        cal_peak_rate_map_t cal_peak_rate_map;
         additional_offset_cal_data_t add_off_cal_data;
-        dmax_calibration_data_t      fmt_dmax_cal;
-        dmax_calibration_data_t      cust_dmax_cal;
-        gain_calibration_data_t      gain_cal;
-        user_zone_t                  mm_roi;
-        optical_centre_t             optical_centre;
-        zone_config_t                zone_cfg;
+        dmax_calibration_data_t fmt_dmax_cal;
+        dmax_calibration_data_t cust_dmax_cal;
+        gain_calibration_data_t gain_cal;
+        user_zone_t mm_roi;
+        optical_centre_t optical_centre;
+        zone_config_t zone_cfg;
 
 
-        tuning_parm_storage_t        tuning_parms;
+        tuning_parm_storage_t tuning_parms;
 
 
         byte[] rtn_good_spads = new byte[RTN_SPAD_BUFFER_SIZE];
 
 
-        refspadchar_config_t         refspadchar;
-        ssc_config_t                 ssc_cfg;
-        hist_post_process_config_t   histpostprocess;
-        hist_gen3_dmax_config_t      dmax_cfg;
-        xtalkextract_config_t        xtalk_extract_cfg;
-        xtalk_config_t               xtalk_cfg;
-        offsetcal_config_t           offsetcal_cfg;
-        zonecal_config_t             zonecal_cfg;
+        refspadchar_config_t refspadchar;
+        ssc_config_t ssc_cfg;
+        hist_post_process_config_t histpostprocess;
+        hist_gen3_dmax_config_t dmax_cfg;
+        xtalkextract_config_t xtalk_extract_cfg;
+        xtalk_config_t xtalk_cfg;
+        offsetcal_config_t offsetcal_cfg;
+        zonecal_config_t zonecal_cfg;
 
 
-        static_nvm_managed_t         stat_nvm;
-        histogram_config_t           hist_cfg;
-        static_config_t              stat_cfg;
-        general_config_t             gen_cfg;
-        timing_config_t              tim_cfg;
-        dynamic_config_t             dyn_cfg;
-        system_control_t             sys_ctrl;
-        system_results_t             sys_results;
-        nvm_copy_data_t              nvm_copy_data;
+        static_nvm_managed_t stat_nvm;
+        histogram_config_t hist_cfg;
+        static_config_t stat_cfg;
+        general_config_t gen_cfg;
+        timing_config_t tim_cfg;
+        dynamic_config_t dyn_cfg;
+        system_control_t sys_ctrl;
+        system_results_t sys_results;
+        nvm_copy_data_t nvm_copy_data;
 
 
-        histogram_bin_data_t         hist_data;
-        histogram_bin_data_t         hist_xtalk;
+        histogram_bin_data_t hist_data;
+        histogram_bin_data_t hist_xtalk;
 
 
-        xtalk_histogram_data_t       xtalk_shapes;
-        xtalk_range_results_t        xtalk_results;
-        xtalk_calibration_results_t  xtalk_cal;
-        hist_xtalk_extract_data_t    xtalk_extract;
+        xtalk_histogram_data_t xtalk_shapes;
+        xtalk_range_results_t xtalk_results;
+        xtalk_calibration_results_t xtalk_cal;
+        hist_xtalk_extract_data_t xtalk_extract;
 
 
-        offset_range_results_t       offset_results;
+        offset_range_results_t offset_results;
 
 
-        core_results_t               core_results;
-        debug_results_t              dbg_results;
+        core_results_t core_results;
+        debug_results_t dbg_results;
 
-        smudge_corrector_config_t  smudge_correct_config;
+        smudge_corrector_config_t smudge_correct_config;
 
         smudge_corrector_internals_t smudge_corrector_internals;
 
 
+        low_power_auto_data_t low_power_auto_data;
 
-
-        low_power_auto_data_t    low_power_auto_data;
-
-        byte[]  wArea1 = new byte[1536];
-        byte[]  wArea2 = new byte[512];
+        byte[] wArea1 = new byte[1536];
+        byte[] wArea2 = new byte[512];
         per_vcsel_period_offset_cal_data_t per_vcsel_cal_data;
 
         byte bin_rec_pos;
 
         byte pos_before_next_recom;
 
-        int  multi_bins_rec[BIN_REC_SIZE][TIMING_CONF_A_B_SIZE][HISTOGRAM_BUFFER_SIZE];
+        int[] multi_bins_rec = new int[BIN_REC_SIZE];/*[BIN_REC_SIZE][TIMING_CONF_A_B_SIZE][HISTOGRAM_BUFFER_SIZE];*/
 
         short[] PreviousRangeMilliMeter = new short[MAX_RANGE_RESULTS];
         byte[] PreviousRangeStatus = new byte[MAX_RANGE_RESULTS];
         byte[] PreviousExtendedRange = new byte[MAX_RANGE_RESULTS];
         byte PreviousRangeActiveResults;
         byte PreviousStreamCount;
-    };
+    }
+
 
     class DevData_t {
-        LLDriverData_t   LLData;
+        LLDriverData_t LLData;
         /*!< Low Level Driver data structure */
 
         LLDriverResults_t llresults;
@@ -1309,27 +1308,29 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
         DeviceParameters_t CurrentParameters;
         /*!< Current Device Parameter */
 
-    };
+    }
+
 
     class Dev_t {
-        DevData_t   Data;
+        DevData_t Data;
         /*!< Low Level Driver data structure */
-        byte   i2c_slave_address;
-        byte   comms_type;
-        short  comms_speed_khz;
-        byte   I2cDevAddr;
-        int     Present;
-        int   Enabled;
+        byte i2c_slave_address;
+        byte comms_type;
+        short comms_speed_khz;
+        byte I2cDevAddr;
+        int Present;
+        int Enabled;
         int LoopState;
         int FirstStreamCountZero;
-        int   Idle;
-        int   Ready;
+        int Idle;
+        int Ready;
         byte RangeStatus;
         int /* FixPoint1616_t */ SignalRateRtnMegaCps;
-        DeviceState   device_state;  /*!< Device State */
-    };
+        DeviceState device_state;  /*!< Device State */
+    }
 
-    protected VL53L4CX(I2cDeviceSynch deviceClient, boolean deviceClientIsOwned) {
+
+    public VL53L4CX(I2cDeviceSynch deviceClient, boolean deviceClientIsOwned) {
         super(deviceClient, deviceClientIsOwned);
         super.registerArmingStateCallback(false);
         this.deviceClient.engage();
@@ -1338,17 +1339,16 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
     // api_core.cpp
 
     Error data_init(
-            DEV        Dev,
-            byte           read_p2p_data)
-    {
+            DEV Dev,
+            byte read_p2p_data) {
 
 
-        Error status       = Error.NONE;
-        LLDriverData_t    *pdev =                VL53L4CXDevStructGetLLDriverHandle(Dev);
-        LLDriverResults_t *pres =                VL53L4CXDevStructGetLLResultsHandle(Dev);
+        Error status = Error.NONE;
+        LLDriverData_t /* * */ pdev = VL53L4CXDevStructGetLLDriverHandle(Dev);
+        LLDriverResults_t /* * */ pres = VL53L4CXDevStructGetLLResultsHandle(Dev);
 
 
-        zone_objects_t    *pobjects;
+        zone_objects_t * pobjects;
 
         byte i = 0;
 
@@ -1356,74 +1356,70 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
                 Dev,
                 DEVICESTATE_UNKNOWN);
 
-        pres->range_results.max_results    = MAX_RANGE_RESULTS;
-        pres->range_results.active_results = 0;
-        pres->zone_results.max_zones       = MAX_USER_ZONES;
-        pres->zone_results.active_zones    = 0;
+        pres -> range_results.max_results = MAX_RANGE_RESULTS;
+        pres -> range_results.active_results = 0;
+        pres -> zone_results.max_zones = MAX_USER_ZONES;
+        pres -> zone_results.active_zones = 0;
 
         for (i = 0; i < MAX_USER_ZONES; i++) {
-            pobjects = &(pres->zone_results.VL53L4CX_p_003[i]);
-            pobjects->xmonitor.VL53L4CX_p_016 = 0;
-            pobjects->xmonitor.VL53L4CX_p_017  = 0;
-            pobjects->xmonitor.VL53L4CX_p_011          = 0;
-            pobjects->xmonitor.range_status =
+            pobjects = &(pres -> zone_results.VL53L4CX_p_003[i]);
+            pobjects -> xmonitor.VL53L4CX_p_016 = 0;
+            pobjects -> xmonitor.VL53L4CX_p_017 = 0;
+            pobjects -> xmonitor.VL53L4CX_p_011 = 0;
+            pobjects -> xmonitor.range_status =
                     DEVICEERROR_NOUPDATE;
         }
 
 
-
-        pres->zone_hists.max_zones         = MAX_USER_ZONES;
-        pres->zone_hists.active_zones      = 0;
-
+        pres -> zone_hists.max_zones = MAX_USER_ZONES;
+        pres -> zone_hists.active_zones = 0;
 
 
-        pres->zone_cal.max_zones           = MAX_USER_ZONES;
-        pres->zone_cal.active_zones        = 0;
+        pres -> zone_cal.max_zones = MAX_USER_ZONES;
+        pres -> zone_cal.active_zones = 0;
         for (i = 0; i < MAX_USER_ZONES; i++) {
-            pres->zone_cal.VL53L4CX_p_003[i].no_of_samples   = 0;
-            pres->zone_cal.VL53L4CX_p_003[i].effective_spads = 0;
-            pres->zone_cal.VL53L4CX_p_003[i].peak_rate_mcps  = 0;
-            pres->zone_cal.VL53L4CX_p_003[i].median_range_mm = 0;
-            pres->zone_cal.VL53L4CX_p_003[i].range_mm_offset = 0;
+            pres -> zone_cal.VL53L4CX_p_003[i].no_of_samples = 0;
+            pres -> zone_cal.VL53L4CX_p_003[i].effective_spads = 0;
+            pres -> zone_cal.VL53L4CX_p_003[i].peak_rate_mcps = 0;
+            pres -> zone_cal.VL53L4CX_p_003[i].median_range_mm = 0;
+            pres -> zone_cal.VL53L4CX_p_003[i].range_mm_offset = 0;
         }
 
-        pdev->wait_method             = WAIT_METHOD_BLOCKING;
-        pdev->preset_mode   = DEVICEPRESETMODE_HISTOGRAM_MEDIUM_RANGE;
-        pdev->zone_preset             = 0;
-        pdev->measurement_mode        = DEVICEMEASUREMENTMODE_STOP;
+        pdev -> wait_method = WAIT_METHOD_BLOCKING;
+        pdev -> preset_mode = DEVICEPRESETMODE_HISTOGRAM_MEDIUM_RANGE;
+        pdev -> zone_preset = 0;
+        pdev -> measurement_mode = DEVICEMEASUREMENTMODE_STOP;
 
-        pdev->offset_calibration_mode =
+        pdev -> offset_calibration_mode =
                 OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD;
-        pdev->offset_correction_mode  =
+        pdev -> offset_correction_mode =
                 OFFSETCORRECTIONMODE__MM1_MM2_OFFSETS;
-        pdev->dmax_mode  =
+        pdev -> dmax_mode =
                 DEVICEDMAXMODE__FMT_CAL_DATA;
 
-        pdev->phasecal_config_timeout_us  =  1000;
-        pdev->mm_config_timeout_us        =  2000;
-        pdev->range_config_timeout_us     = 13000;
-        pdev->inter_measurement_period_ms =   100;
-        pdev->dss_config__target_total_rate_mcps = 0x0A00;
-        pdev->debug_mode                  =  0x00;
+        pdev -> phasecal_config_timeout_us = 1000;
+        pdev -> mm_config_timeout_us = 2000;
+        pdev -> range_config_timeout_us = 13000;
+        pdev -> inter_measurement_period_ms = 100;
+        pdev -> dss_config__target_total_rate_mcps = 0x0A00;
+        pdev -> debug_mode = 0x00;
 
-        pdev->offset_results.max_results    = MAX_OFFSET_RANGE_RESULTS;
-        pdev->offset_results.active_results = 0;
+        pdev -> offset_results.max_results = MAX_OFFSET_RANGE_RESULTS;
+        pdev -> offset_results.active_results = 0;
 
 
-
-        pdev->gain_cal.standard_ranging_gain_factor =
+        pdev -> gain_cal.standard_ranging_gain_factor =
                 TUNINGPARM_LITE_RANGING_GAIN_FACTOR_DEFAULT;
-        pdev->gain_cal.histogram_ranging_gain_factor =
+        pdev -> gain_cal.histogram_ranging_gain_factor =
                 TUNINGPARM_HIST_GAIN_FACTOR_DEFAULT;
 
 
         VL53L4CX_init_version(Dev);
 
 
-        memset(pdev->multi_bins_rec, 0, sizeof(pdev->multi_bins_rec));
-        pdev->bin_rec_pos = 0;
-        pdev->pos_before_next_recom = 0;
-
+        memset(pdev -> multi_bins_rec, 0, sizeof(pdev -> multi_bins_rec));
+        pdev -> bin_rec_pos = 0;
+        pdev -> pos_before_next_recom = 0;
 
 
         if (read_p2p_data > 0 && status == Error.NONE) {
@@ -1433,79 +1429,77 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
         if (status == Error.NONE)
             status = VL53L4CX_init_refspadchar_config_struct(
-                    &(pdev->refspadchar));
+                    & (pdev -> refspadchar));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_ssc_config_struct(
-                    &(pdev->ssc_cfg));
+                    & (pdev -> ssc_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_xtalk_config_struct(
-                    &(pdev->customer),
-               &(pdev->xtalk_cfg));
+                    & (pdev -> customer),
+               &(pdev -> xtalk_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_xtalk_extract_config_struct(
-                    &(pdev->xtalk_extract_cfg));
+                    & (pdev -> xtalk_extract_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_offset_cal_config_struct(
-                    &(pdev->offsetcal_cfg));
+                    & (pdev -> offsetcal_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_zone_cal_config_struct(
-                    &(pdev->zonecal_cfg));
+                    & (pdev -> zonecal_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_hist_post_process_config_struct(
-                    pdev->xtalk_cfg.global_crosstalk_compensation_enable,
-                    &(pdev->histpostprocess));
+                    pdev -> xtalk_cfg.global_crosstalk_compensation_enable,
+                    & (pdev -> histpostprocess));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_hist_gen3_dmax_config_struct(
-                    &(pdev->dmax_cfg));
+                    & (pdev -> dmax_cfg));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_init_tuning_parm_storage_struct(
-                    &(pdev->tuning_parms));
-
+                    & (pdev -> tuning_parms));
 
 
         if (status == Error.NONE)
             status = VL53L4CX_set_preset_mode(
                     Dev,
-                    pdev->preset_mode,
-                    pdev->dss_config__target_total_rate_mcps,
-                    pdev->phasecal_config_timeout_us,
-                    pdev->mm_config_timeout_us,
-                    pdev->range_config_timeout_us,
-                    pdev->inter_measurement_period_ms);
+                    pdev -> preset_mode,
+                    pdev -> dss_config__target_total_rate_mcps,
+                    pdev -> phasecal_config_timeout_us,
+                    pdev -> mm_config_timeout_us,
+                    pdev -> range_config_timeout_us,
+                    pdev -> inter_measurement_period_ms);
 
 
         VL53L4CX_init_histogram_bin_data_struct(
                 0,
                 HISTOGRAM_BUFFER_SIZE,
-                &(pdev->hist_data));
+                & (pdev -> hist_data));
 
         VL53L4CX_init_histogram_bin_data_struct(
                 0,
                 HISTOGRAM_BUFFER_SIZE,
-                &(pdev->hist_xtalk));
+                & (pdev -> hist_xtalk));
 
 
         VL53L4CX_init_xtalk_bin_data_struct(
                 0,
                 XTALK_HISTO_BINS,
-                &(pdev->xtalk_shapes.xtalk_shape));
-
+                & (pdev -> xtalk_shapes.xtalk_shape));
 
 
         VL53L4CX_xtalk_cal_data_init(
@@ -1513,11 +1507,9 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
         );
 
 
-
         VL53L4CX_dynamic_xtalk_correction_data_init(
                 Dev
         );
-
 
 
         VL53L4CX_low_power_auto_data_init(
@@ -1526,7 +1518,6 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
         return status;
     }
-
 
 
     // api.cpp
@@ -1603,8 +1594,8 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
 
     Error SetDeviceAddress(byte DeviceAddress) {
         Error Status = Error.NONE;
-        LLDriverData_t * pdev = VL53L4CXDevStructGetLLDriverHandle(Dev);
-        static_nvm_managed_t * pdata = &(pdev -> stat_nvm);
+        LLDriverData_t /* * */ pdev = VL53L4CXDevStructGetLLDriverHandle(Dev);
+        static_nvm_managed_t /* * */ pdata /*=  &(pdev -> stat_nvm)*/;
 
         Status = this.WrByte(Dev, I2C_SLAVE__DEVICE_ADDRESS, DeviceAddress / 2);
 
@@ -1612,7 +1603,8 @@ public class VL53L4CX extends I2cDeviceSynchDevice<I2cDeviceSynch> {
             Dev -> I2cDevAddr = DeviceAddress;
         }
 
-        pdata -> i2c_slave__device_address = (DeviceAddress / 2) & 0x7F;
+        /*pdata ->*/
+        i2c_slave__device_address = (DeviceAddress / 2) & 0x7F;
 
         return Status;
     }
