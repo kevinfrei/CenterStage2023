@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.util.Angle;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.command.Command;
@@ -35,6 +36,9 @@ public class HeadingDriveCommand implements Command, Loggable {
     @Log(name = "heading")
     public double curHeadingDeg;
 
+    @Log(name = "pidtarget")
+    public double pidtarget;
+
     public ElapsedTime lastRead;
     // This should be true when we have been rotating due to user input
     // When it changes from true to false, we should set the targetHeading to curHeading,
@@ -44,7 +48,7 @@ public class HeadingDriveCommand implements Command, Loggable {
     PIDFController rotationalPid;
 
     // These values are just flat out wrong. I pulled them out of thin air.
-    public static PIDCoefficients ROTATE_PID = new PIDCoefficients(1e-2, 1e-3, 1e-4);
+    public static PIDCoefficients ROTATE_PID = new PIDCoefficients(1e-4, 0, 0);
 
     public HeadingDriveCommand(
         PathFollowingSubsystem sub,
@@ -63,7 +67,9 @@ public class HeadingDriveCommand implements Command, Loggable {
         lastRead = new ElapsedTime();
         lastRotateChange = false;
         rotationalPid = new PIDFController(ROTATE_PID);
-        rotationalPid.setOutputBounds(-1, 1);
+        rotationalPid.setOutputBounds(-.3, .3);
+        rotationalPid.targetPosition = 0;
+        pidtarget = 0;
     }
 
     // Use this constructor if you don't want auto-straightening
@@ -77,7 +83,7 @@ public class HeadingDriveCommand implements Command, Loggable {
     private double getRotation(double headingInRads) {
         // headingInRads should be [0-2pi]
         // headingDeg is +/-180, cuz that's just easier for my weak brain...
-        double headingDeg = AngleUnit.normalizeDegrees(Math.toDegrees(headingInRads));
+        this.curHeadingDeg = AngleUnit.normalizeDegrees(Math.toDegrees(headingInRads));
 
         // Get the amount of time passed since we last read the rotation value from the user
         double lastReadDelta = getTimeSinceLastRead();
@@ -86,7 +92,7 @@ public class HeadingDriveCommand implements Command, Loggable {
         if (straight.getAsBoolean()) {
             // Snap to the closest 90 degree angle
             // There's some annoying wrap-around stuff to deal with here that I haven't yet:
-            rotationalPid.targetPosition = MathUtils.closestTo(headingDeg, -180, -90, 0, 90, 180);
+            this.targetHeadingDeg = MathUtils.closestTo(this.curHeadingDeg, -180, -90, 0, 90, 180);
             // indicate that the user is doing something
             // (so that when the user *stops* doing something, we'll stop the bot from rotating)
             this.lastRotateChange = true;
@@ -99,19 +105,31 @@ public class HeadingDriveCommand implements Command, Loggable {
                     // If the user just moved to "zero",
                     // then set the target heading to the current heading.
                     // Basically, stop rotating.
-                    this.targetHeadingDeg = headingDeg;
+                    this.targetHeadingDeg = this.curHeadingDeg;
                 }
             }
             // Calculate the angle change, based on the rotational speed settings over time
             double changeDegrees =
                 rotationInput * lastReadDelta * Setup.HeadingSettings.DEGREES_PER_SECOND;
-            if (!userInput && this.lastRotateChange) {
-                this.targetHeadingDeg = headingDeg;
-            }
             this.lastRotateChange = userInput;
-            rotationalPid.targetPosition = this.targetHeadingDeg + changeDegrees;
+            double maxTargetHeadingDeg = AngleUnit.normalizeDegrees(
+                this.targetHeadingDeg - changeDegrees
+            );
+            if (Math.abs(maxTargetHeadingDeg - this.curHeadingDeg) > 45) {
+                this.targetHeadingDeg =
+                    Math.copySign(45, maxTargetHeadingDeg - this.curHeadingDeg) +
+                    this.curHeadingDeg;
+            } else {
+                this.targetHeadingDeg = maxTargetHeadingDeg;
+            }
         }
-        return rotationalPid.update(this.curHeadingDeg);
+        // targetHeading is which direction we want to be, curHeading is where we're
+        // currently facing. The PID 'target' is zero, so the current PID 'position' is the delta,
+        // scaled down to fit in the range of -1 to 1
+        this.pidtarget =
+            AngleUnit.normalizeDegrees(this.targetHeadingDeg - this.curHeadingDeg) / 90;
+        // this.pidtarget = rotationalPid.update(target);
+        return this.pidtarget;
     }
 
     // Return the fraction of a second since we last read user input

@@ -25,7 +25,7 @@ public class PathController implements Loggable {
         this.robot = r;
         gamepad = g;
         AssignNamedControllerButton();
-        if (Setup.Connected.pathDriveBase) {
+        if (Setup.Connected.PATHDRIVEBASE) {
             bindDriveControls();
         }
     }

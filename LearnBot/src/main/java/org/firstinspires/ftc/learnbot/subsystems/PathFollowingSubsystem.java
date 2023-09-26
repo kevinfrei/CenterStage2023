@@ -34,6 +34,8 @@ public class PathFollowingSubsystem
         @MaxRPM
         public static final double MAX_RPM = 312; // 2021: 6000;
 
+        public static double MAX_TICKS_PER_SEC = (TICKS_PER_REV * MAX_RPM) / 60.0;
+
         @UseDriveEncoder
         public static final boolean RUN_USING_ENCODER = true;
 
@@ -104,19 +106,15 @@ public class PathFollowingSubsystem
         @PoseLimit
         public static int POSE_HISTORY_LIMIT = 100;
 
-        // FL - 0.82
-        // FR - 0.8
-        // RL - 0.1
-        // RR - 0.74
-        public static double AFR_SCALE = 0.8;
-        public static double AFL_SCALE = 0.82;
-        public static double ARR_SCALE = 0.74;
-        public static double ARL_SCALE = 1;
+        public static double AFR_SCALE = 0.9;
+        public static double AFL_SCALE = 0.9;
+        public static double ARR_SCALE = 0.9;
+        public static double ARL_SCALE = 0.9;
     }
 
     private static final boolean ENABLE_POSE_DIAGNOSTICS = true;
 
-    @Log(name = "Pose2d: ")
+    // @Log(name = "Pose2d: ")
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
     // @Log.Number(name = "FL")
@@ -128,7 +126,7 @@ public class PathFollowingSubsystem
     // @Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
-    @Log
+    // @Log
     public String locState = "none";
 
     public PathFollowingSubsystem(
@@ -166,10 +164,10 @@ public class PathFollowingSubsystem
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v * DriveConstants.AFL_SCALE);
-        leftRear.setPower(v1 * DriveConstants.ARL_SCALE);
-        rightRear.setPower(v2 * DriveConstants.ARR_SCALE);
-        rightFront.setPower(v3 * DriveConstants.AFR_SCALE);
+        leftFront.setVelocity(v * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFL_SCALE);
+        leftRear.setVelocity(v1 * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARL_SCALE);
+        rightRear.setVelocity(v2 * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARR_SCALE);
+        rightFront.setVelocity(v3 * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFR_SCALE);
     }
     // Stuff below is used for tele-op trajectory motion
 }

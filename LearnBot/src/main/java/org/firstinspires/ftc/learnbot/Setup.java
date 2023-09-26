@@ -38,7 +38,6 @@ public class Setup {
 
         public static double STICK_DEAD_ZONE = 0.1;
         public static int AUTOTIME = 25;
-        public static double STICK_DEAD_ZONE = 0.08;
     }
 
     @Config
