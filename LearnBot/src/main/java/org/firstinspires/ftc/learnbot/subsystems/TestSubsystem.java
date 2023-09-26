@@ -35,10 +35,10 @@ public class TestSubsystem implements Subsystem, Loggable {
     private double curPower;
     private double zeroTicks;
 
-    @Log(name = "Power")
+    // @Log(name = "Power")
     public volatile double power = 0.0;
 
-    @Log(name = "Ticks")
+    // @Log(name = "Ticks")
     public volatile double ticks = 0.0;
 
     @Log(name = "Stop mode")

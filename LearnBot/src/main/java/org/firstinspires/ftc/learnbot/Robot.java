@@ -4,6 +4,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.learnbot.helpers.StartingPosition;
 import org.firstinspires.ftc.learnbot.subsystems.DrivebaseSubsystem;
+import org.firstinspires.ftc.learnbot.subsystems.PathFollowingSubsystem;
 import org.firstinspires.ftc.learnbot.subsystems.TestSubsystem;
 
 public class Robot implements Loggable {
@@ -22,8 +23,8 @@ public class Robot implements Loggable {
         if (Setup.Connected.DRIVEBASE) {
             this.drivebaseSubsystem =
                 new DrivebaseSubsystem(hw.imu, hw.flMotor, hw.frMotor, hw.rlMotor, hw.rrMotor);
-        this.pathingSubsystem =
-            new PathFollowingSubsystem(hw.flMotor, hw.frMotor, hw.rlMotor, hw.rrMotor, hw.imu);
+            this.pathingSubsystem =
+                new PathFollowingSubsystem(hw.flMotor, hw.frMotor, hw.rlMotor, hw.rrMotor, hw.imu);
         }
         if (Setup.Connected.TESTSUBSYSTEM) {
             this.test = new TestSubsystem(hw);

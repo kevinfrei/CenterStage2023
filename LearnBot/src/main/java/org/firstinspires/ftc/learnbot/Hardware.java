@@ -39,14 +39,14 @@ public class Hardware implements Loggable {
             if (Setup.Connected.MOTOR) {
                 this.theMotor = new EncodedMotor<>(Setup.HardwareNames.MOTOR);
             }
-            if (Setup.Connected.servoTest) {
-                this.servo = new Servo(Setup.HardwareNames.TEST_SERVO);
+            if (Setup.Connected.SERVO) {
+                this.servo = new Servo(Setup.HardwareNames.SERVO);
             }
-            if (Setup.Connected.distanceSensorTest) {
-                this.distanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.TEST_DISTANCE);
+            if (Setup.Connected.DISTANCE_SENSOR) {
+                this.distanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DISTANCE);
             }
-            if (Setup.Connected.colorSensorTest) {
-                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.TEST_COLOR);
+            if (Setup.Connected.COLOR_SENSOR) {
+                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
             }
         }
         this.imu =
