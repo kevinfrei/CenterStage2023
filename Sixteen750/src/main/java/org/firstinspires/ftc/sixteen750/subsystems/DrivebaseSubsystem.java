@@ -122,13 +122,13 @@ public class DrivebaseSubsystem
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
     // @Log.Number(name = "FL")
-    public EncodedMotor<DcMotorEx> fl2;
-    // @Log.Number(name = "FR")
-    public EncodedMotor<DcMotorEx> fr2;
-    // @Log.Number(name = "RL")
-    public EncodedMotor<DcMotorEx> rl2;
-    // @Log.Number(name = "RR")
-    public EncodedMotor<DcMotorEx> rr2;
+//    public EncodedMotor<DcMotorEx> fl2;
+//    // @Log.Number(name = "FR")
+//    public EncodedMotor<DcMotorEx> fr2;
+//    // @Log.Number(name = "RL")
+//    public EncodedMotor<DcMotorEx> rl2;
+//    // @Log.Number(name = "RR")
+//    public EncodedMotor<DcMotorEx> rr2;
 
     @Log
     public String locState = "none";
@@ -141,10 +141,10 @@ public class DrivebaseSubsystem
         IMU i
     ) {
         super(fl, fr, rl, rr, i, () -> DriveConstants.class);
-        fl2 = fl;
-        fr2 = fr;
-        rl2 = rl;
-        rr2 = rr;
+//        fl2 = fl;
+//        fr2 = fr;
+//        rl2 = rl;
+//        rr2 = rr;
         speed = DriveConstants.SLOW_MOTOR_SPEED;
     }
 
