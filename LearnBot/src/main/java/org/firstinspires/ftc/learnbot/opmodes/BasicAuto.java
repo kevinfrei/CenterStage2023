@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.learnbot.opmodes;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.technototes.library.command.CommandScheduler;
@@ -20,10 +21,12 @@ import org.firstinspires.ftc.learnbot.Setup;
  * Wing position: 🪶
  * Backstage pos: 🎦
  */
+@Config
 @Autonomous(name = "Basic Auto")
 @SuppressWarnings("unused")
 public class BasicAuto extends CommandOpMode implements Loggable {
 
+    public static int AUTO_TIME = 25;
     public Hardware hardware;
     public Robot robot;
 
@@ -36,7 +39,7 @@ public class BasicAuto extends CommandOpMode implements Loggable {
             new SequentialCommandGroup(
                 // new TurboCommand(robot.drivebaseSubsystem),
                 // new StartSpinningCmd(robot.spinner),
-                new WaitCommand(Setup.OtherSettings.AUTOTIME),
+                new WaitCommand(AUTO_TIME),
                 // new StopSpinningCmd(robot.spinner),
                 CommandScheduler::terminateOpMode
             ),
