@@ -87,7 +87,6 @@ public class SingleController {
 
     public void bindDriveControls() {
         CommandScheduler
-            .getInstance()
             .scheduleJoystick(
                 new JoystickDriveCommand(robot.drivebase, driveLeftStick, driveRightStick)
             );

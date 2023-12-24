@@ -30,7 +30,6 @@ public class SingleTeleOp extends CommandOpMode {
         controls = new SingleController(driverGamepad, robot, setup);
         robot.drivebase.setPoseEstimate(AutoConstants.WingRed.TELESTART.toPose());
         CommandScheduler
-            .getInstance()
             .scheduleForState(new ResetGyroCommand(robot.drivebase), OpModeState.INIT);
     }
 }

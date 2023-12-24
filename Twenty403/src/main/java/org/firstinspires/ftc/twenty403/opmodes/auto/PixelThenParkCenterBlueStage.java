@@ -31,10 +31,9 @@ public class PixelThenParkCenterBlueStage extends CommandOpMode {
         robot = new Robot(hardware, Alliance.BLUE, StartingPosition.Backstage);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.StageBlue.START.toPose());
         CommandScheduler
-            .getInstance()
             .scheduleForState(new BlueStageParkCenter(robot), OpModeState.RUN);
         if (Setup.Connected.WEBCAM) {
-            CommandScheduler.getInstance().scheduleInit(new VisionCommand(robot.vision));
+            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
         }
     }
 }

@@ -31,10 +31,9 @@ public class PixelThenParkCornerRedStage extends CommandOpMode {
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Backstage);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.StageRed.START.toPose());
         CommandScheduler
-            .getInstance()
             .scheduleForState(new RedStageParkCorner(robot), OpModeState.RUN);
         if (Setup.Connected.WEBCAM) {
-            CommandScheduler.getInstance().scheduleInit(new VisionCommand(robot.vision));
+            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
         }
     }
 }

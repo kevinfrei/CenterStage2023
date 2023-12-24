@@ -34,7 +34,6 @@ public class JustDrivingTeleOp extends CommandOpMode {
             controlsDriver = new DriverController(driverGamepad, robot);
             robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.WingRed.START.toPose());
             CommandScheduler
-                .getInstance()
                 .scheduleForState(new ResetGyroCommand(robot.drivebaseSubsystem), OpModeState.INIT);
         }
     }

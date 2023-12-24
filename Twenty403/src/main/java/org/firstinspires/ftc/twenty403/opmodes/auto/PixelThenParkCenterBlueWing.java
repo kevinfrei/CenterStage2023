@@ -31,10 +31,9 @@ public class PixelThenParkCenterBlueWing extends CommandOpMode {
         robot = new Robot(hardware, Alliance.BLUE, StartingPosition.Wing);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.WingBlue.START.toPose());
         CommandScheduler
-            .getInstance()
             .scheduleForState(new BlueWingParkCenter(robot), OpModeState.RUN);
         if (Setup.Connected.WEBCAM) {
-            CommandScheduler.getInstance().scheduleInit(new VisionCommand(robot.vision));
+            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
         }
     }
 }

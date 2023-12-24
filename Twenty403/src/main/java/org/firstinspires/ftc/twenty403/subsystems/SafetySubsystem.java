@@ -110,14 +110,14 @@ public class SafetySubsystem implements Subsystem, Loggable {
 
     public SafetySubsystem(Hardware hw) {
         myHw = hw;
-        CommandScheduler.getInstance().register(this);
+        CommandScheduler.register(this);
     }
 
     private void stopAuto(String reason) {
         if (monitoringEnabled == true) {
             if (numFailed >= MaxFail) {
                 stopAutoReason = reason;
-                CommandScheduler.getInstance().terminateOpMode();
+                CommandScheduler.terminateOpMode();
             } else {
                 numFailed += 1;
             }

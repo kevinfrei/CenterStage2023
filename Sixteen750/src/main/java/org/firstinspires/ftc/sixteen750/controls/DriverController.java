@@ -45,7 +45,6 @@ public class DriverController {
 
     public void bindDriveControls() {
         CommandScheduler
-            .getInstance()
             .scheduleJoystick(
                 new JoystickDriveCommand(
                     robot.drivebase,

@@ -32,16 +32,15 @@ public class ForwardBackwardSide extends CommandOpMode {
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
         robot.drivebase.setPoseEstimate(AutoConstants.WingRed.FORWARD.toPose());
         CommandScheduler
-            .getInstance()
             .scheduleForState(
                 new SequentialCommandGroup(
                     new ForwardBackwardCommand(robot),
-                    CommandScheduler.getInstance()::terminateOpMode
+                    CommandScheduler::terminateOpMode
                 ),
                 OpModeState.RUN
             );
         if (Setup.Connected.WEBCAM) {
-            CommandScheduler.getInstance().scheduleInit(new VisionCommand(robot.vision));
+            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
         }
     }
 }

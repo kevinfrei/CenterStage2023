@@ -37,7 +37,6 @@ public class DualTeleOp extends CommandOpMode {
             // Just pick a starting point
             robot.drivebase.setPoseEstimate(AutoConstants.WingRed.START.toPose());
             CommandScheduler
-                .getInstance()
                 .scheduleForState(
                     new SequentialCommandGroup(
                         new ResetGyroCommand(robot.drivebase),
