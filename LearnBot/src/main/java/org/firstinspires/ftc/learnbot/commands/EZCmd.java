@@ -9,7 +9,7 @@ import org.firstinspires.ftc.learnbot.subsystems.PlacementSubsystem;
 import org.firstinspires.ftc.learnbot.subsystems.TestSubsystem;
 
 
-public class Cmd {
+public class EZCmd {
     public static class AnalogMotor {
         public static Command Increment(MotorTestSubsystem ss) {
             return new MethodCommand(ss::motorInc, ss);

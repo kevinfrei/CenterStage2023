@@ -6,7 +6,7 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.learnbot.Robot;
-import org.firstinspires.ftc.learnbot.commands.Cmd;
+import org.firstinspires.ftc.learnbot.commands.EZCmd;
 import org.firstinspires.ftc.learnbot.commands.drivingOutReach.JoystickDriveCommand;
 import org.firstinspires.ftc.learnbot.commands.drivingOutReach.ResetGyroCommand;
 
@@ -48,10 +48,10 @@ public class DriverController {
                     driveRightStick,
                     driveStraighten
                 ));
-        turboButton.whenPressed(Cmd.Drive.TurboMode(robot.drivebaseSubsystem));
-        turboButton.whenReleased(Cmd.Drive.NormalMode(robot.drivebaseSubsystem));
-        snailButton.whenPressed(Cmd.Drive.SnailMode(robot.drivebaseSubsystem));
-        snailButton.whenReleased(Cmd.Drive.NormalMode(robot.drivebaseSubsystem));
+        turboButton.whenPressed(EZCmd.Drive.TurboMode(robot.drivebaseSubsystem));
+        turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
+        snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
+        snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
 
         resetGyroButton.whenPressed(new ResetGyroCommand(robot.drivebaseSubsystem));
     }
