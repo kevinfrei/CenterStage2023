@@ -6,11 +6,9 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.learnbot.Robot;
+import org.firstinspires.ftc.learnbot.commands.Cmd;
 import org.firstinspires.ftc.learnbot.commands.drivingOutReach.JoystickDriveCommand;
-import org.firstinspires.ftc.learnbot.commands.drivingOutReach.NormalModeCommand;
 import org.firstinspires.ftc.learnbot.commands.drivingOutReach.ResetGyroCommand;
-import org.firstinspires.ftc.learnbot.commands.drivingOutReach.SnailModeCommand;
-import org.firstinspires.ftc.learnbot.commands.drivingOutReach.TurboModeCommand;
 
 public class DriverController {
 
@@ -43,20 +41,17 @@ public class DriverController {
     }
 
     public void bindDriveControls() {
-        CommandScheduler
-            .getInstance()
-            .scheduleJoystick(
-                new JoystickDriveCommand(
+        CommandScheduler.scheduleJoystick(
+            new JoystickDriveCommand(
                     robot.drivebaseSubsystem,
                     driveLeftStick,
                     driveRightStick,
                     driveStraighten
-                )
-            );
-        turboButton.whenPressed(new TurboModeCommand(robot.drivebaseSubsystem));
-        turboButton.whenReleased(new NormalModeCommand(robot.drivebaseSubsystem));
-        snailButton.whenPressed(new SnailModeCommand(robot.drivebaseSubsystem));
-        snailButton.whenReleased(new NormalModeCommand(robot.drivebaseSubsystem));
+                ));
+        turboButton.whenPressed(Cmd.Drive.TurboMode(robot.drivebaseSubsystem));
+        turboButton.whenReleased(Cmd.Drive.NormalMode(robot.drivebaseSubsystem));
+        snailButton.whenPressed(Cmd.Drive.SnailMode(robot.drivebaseSubsystem));
+        snailButton.whenReleased(Cmd.Drive.NormalMode(robot.drivebaseSubsystem));
 
         resetGyroButton.whenPressed(new ResetGyroCommand(robot.drivebaseSubsystem));
     }
