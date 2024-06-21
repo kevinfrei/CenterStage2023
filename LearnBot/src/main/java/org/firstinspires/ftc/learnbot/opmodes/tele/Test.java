@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.learnbot.opmodes;
+package org.firstinspires.ftc.learnbot.opmodes.tele;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -12,7 +12,8 @@ import org.firstinspires.ftc.learnbot.Robot;
 import org.firstinspires.ftc.learnbot.commands.TriggerTestCommand;
 import org.firstinspires.ftc.learnbot.controllers.TestController;
 
-@TeleOp(name = "TestBed")
+@TeleOp(name = "Test")
+@SuppressWarnings("unused")
 public class Test extends CommandOpMode implements Loggable {
 
     public Robot robot;
@@ -27,11 +28,10 @@ public class Test extends CommandOpMode implements Loggable {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware);
         testCtrl = new TestController(driverGamepad, robot);
-        trigTest =
-            new TriggerTestCommand(
-                driverGamepad.leftTrigger,
-                driverGamepad.leftTrigger.getAsButton(.5)
-            );
+        trigTest = new TriggerTestCommand(
+            driverGamepad.leftTrigger,
+            driverGamepad.leftTrigger.getAsButton(.5)
+        );
         CommandScheduler.scheduleJoystick(trigTest);
     }
 }

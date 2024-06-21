@@ -48,6 +48,7 @@ public class MotorTestSubsystem implements Subsystem, Loggable {
     public Command MotorInc() {
         return new MethodCommand(this::motorInc, this);
     }
+
     public Command MotorDec() {
         return new MethodCommand(this::motorDec, this);
     }

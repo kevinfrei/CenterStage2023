@@ -22,14 +22,13 @@ public class DriverController {
     }
 
     public void bindDriveControls() {
-        CommandScheduler
-            .scheduleJoystick(
-                new DriveCommand(
-                    robot.drivebaseSubsystem,
-                    driveLeftStick,
-                    driveRightStick,
-                    driveStraight
-                )
-            );
+        CommandScheduler.scheduleJoystick(
+            new DriveCommand(
+                robot.drivebaseSubsystem,
+                driveLeftStick,
+                driveRightStick,
+                driveStraight
+            )
+        );
     }
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.learnbot.opmodes;
+package org.firstinspires.ftc.learnbot.opmodes.auto;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -20,9 +20,9 @@ import org.firstinspires.ftc.learnbot.Setup;
  * Wing position: 🪶
  * Backstage pos: 🎦
  */
-@Autonomous(name = "Basic Auto")
+@Autonomous(name = "Basic")
 @SuppressWarnings("unused")
-public class BasicAuto extends CommandOpMode implements Loggable {
+public class Basic extends CommandOpMode implements Loggable {
 
     public Hardware hardware;
     public Robot robot;

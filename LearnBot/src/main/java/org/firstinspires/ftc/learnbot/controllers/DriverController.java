@@ -42,11 +42,12 @@ public class DriverController {
     public void bindDriveControls() {
         CommandScheduler.scheduleJoystick(
             new JoystickDriveCommand(
-                    robot.drivebaseSubsystem,
-                    driveLeftStick,
-                    driveRightStick,
-                    driveStraighten
-                ));
+                robot.drivebaseSubsystem,
+                driveLeftStick,
+                driveRightStick,
+                driveStraighten
+            )
+        );
         turboButton.whenPressed(EZCmd.Drive.TurboMode(robot.drivebaseSubsystem));
         turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));

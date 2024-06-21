@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.learnbot.opmodes;
+package org.firstinspires.ftc.learnbot.opmodes.tele;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -8,8 +8,9 @@ import com.technototes.library.structure.CommandOpMode;
 import org.firstinspires.ftc.learnbot.ClawAndWristBot;
 import org.firstinspires.ftc.learnbot.controllers.ClawAndWristController;
 
-@TeleOp(name = "Claw And Wrist")
-public class ClawAndWristTele extends CommandOpMode implements Loggable {
+@TeleOp(name = "ClawAndWrist")
+@SuppressWarnings("unused")
+public class ClawAndWrist extends CommandOpMode implements Loggable {
 
     ClawAndWristBot cawbot;
     ClawAndWristController controller;
