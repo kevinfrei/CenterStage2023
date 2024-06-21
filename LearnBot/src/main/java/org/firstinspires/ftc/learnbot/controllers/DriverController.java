@@ -7,8 +7,7 @@ import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.learnbot.Robot;
 import org.firstinspires.ftc.learnbot.commands.EZCmd;
-import org.firstinspires.ftc.learnbot.commands.drivingOutReach.JoystickDriveCommand;
-import org.firstinspires.ftc.learnbot.commands.drivingOutReach.ResetGyroCommand;
+import org.firstinspires.ftc.learnbot.commands.JoystickDriveCommand;
 
 public class DriverController {
 
@@ -53,6 +52,6 @@ public class DriverController {
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
         snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
 
-        resetGyroButton.whenPressed(new ResetGyroCommand(robot.drivebaseSubsystem));
+        resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
     }
 }

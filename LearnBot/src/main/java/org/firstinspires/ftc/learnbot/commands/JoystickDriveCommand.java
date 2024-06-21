@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.learnbot.commands.drivingOutReach;
+package org.firstinspires.ftc.learnbot.commands;
 
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;

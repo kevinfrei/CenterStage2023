@@ -32,8 +32,8 @@ public class MotorController implements Loggable {
             CommandScheduler.scheduleJoystick(motorMovement);
             toggleAnalogControl.whenPressed(EZCmd.AnalogMotor.ToggleStopMode(r.motorTestSubsystem));
             toggleStopMode.whenPressed(EZCmd.AnalogMotor.ToggleStopMode(r.motorTestSubsystem));
-            motorDecButton.whenPressed(EZCmd.AnalogMotor.Decrement(r.motorTestSubsystem));
-            // motorIncButton.whenPressed(Cmd.AnalogMotor.Increment(r.motorTestSubsystem));
+
+            motorDecButton.whilePressed(r.motorTestSubsystem.MotorDec());
             motorIncButton.whilePressed(r.motorTestSubsystem.MotorInc());
         }
     }

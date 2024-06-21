@@ -3,6 +3,7 @@ package org.firstinspires.ftc.learnbot.commands;
 import com.technototes.library.command.Command;
 import com.technototes.library.command.MethodCommand;
 
+import org.firstinspires.ftc.learnbot.subsystems.ClawAndWristSubsystem;
 import org.firstinspires.ftc.learnbot.subsystems.DrivebaseSubsystem;
 import org.firstinspires.ftc.learnbot.subsystems.MotorTestSubsystem;
 import org.firstinspires.ftc.learnbot.subsystems.PlacementSubsystem;
@@ -11,17 +12,17 @@ import org.firstinspires.ftc.learnbot.subsystems.TestSubsystem;
 
 public class EZCmd {
     public static class AnalogMotor {
-        public static Command Increment(MotorTestSubsystem ss) {
-            return new MethodCommand(ss::motorInc, ss);
+        public static Command ToggleControlMode(MotorTestSubsystem mts) {
+            return new MethodCommand(mts::toggleMotorControlMode);
         }
-        public static Command Decrement(MotorTestSubsystem ss) {
-            return new MethodCommand(ss::motorDec, ss);
+        public static Command ToggleStopMode(MotorTestSubsystem mts) {
+            return new MethodCommand(mts::toggleMotorStopMode);
         }
-        public static Command ToggleControlMode(MotorTestSubsystem ss) {
-            return new MethodCommand(ss::toggleMotorControlMode);
+        public static Command MotorInc(MotorTestSubsystem mts) {
+            return mts.MotorInc();
         }
-        public static Command ToggleStopMode(MotorTestSubsystem ss) {
-            return new MethodCommand(ss::toggleMotorStopMode);
+        public static Command MotorDec(MotorTestSubsystem mts) {
+            return mts.MotorDec();
         }
     }
 
@@ -34,6 +35,21 @@ public class EZCmd {
         }
         public static Command LiftLow(PlacementSubsystem ss) {
             return new MethodCommand(ss::liftHeightLow, ss);
+        }
+    }
+
+    public static class ClawAndWrist {
+        public static Command ClawDec(ClawAndWristSubsystem cws) {
+            return new MethodCommand(cws::ClawDec, cws);
+        }
+        public static Command ClawInc(ClawAndWristSubsystem cws) {
+            return new MethodCommand(cws::ClawInc, cws);
+        }
+        public static Command WristDec(ClawAndWristSubsystem cws) {
+            return new MethodCommand(cws::WristDec, cws);
+        }
+        public static Command WristInc(ClawAndWristSubsystem cws) {
+            return new MethodCommand(cws::WristInc, cws);
         }
     }
 
@@ -67,6 +83,9 @@ public class EZCmd {
         }
         public static Command SnailMode(DrivebaseSubsystem db) {
             return new MethodCommand(db::setSnailMode);
+        }
+        public static Command ResetGyro(DrivebaseSubsystem db) {
+            return new MethodCommand(db::setExternalHeading, 0.0);
         }
     }
 }

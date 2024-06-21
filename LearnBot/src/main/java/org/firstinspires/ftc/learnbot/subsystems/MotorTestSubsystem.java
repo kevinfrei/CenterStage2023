@@ -37,15 +37,26 @@ public class MotorTestSubsystem implements Subsystem, Loggable {
         curPower = 0.0;
     }
 
+    // Example of another way to create 'simple' commands.
+    // A couple of advantages of doing it this way:
+    // 1. You don't have to expose the methods as public.
+    //    Notice that motorInc and motorDec are both *private* methods!
+    // 2. What is controlling or observing is controlled in the subsystem,
+    //    rather than by the author of the commands. This helps minimize
+    //    how much understanding of the subsystem has to exist outside the
+    //    implementation.
     public Command MotorInc() {
         return new MethodCommand(this::motorInc, this);
     }
+    public Command MotorDec() {
+        return new MethodCommand(this::motorDec, this);
+    }
 
-    public void motorInc() {
+    private void motorInc() {
         if (controlMode.equals("digital")) setPower(getPower() + POWER_CHANGE);
     }
 
-    public void motorDec() {
+    private void motorDec() {
         if (controlMode.equals("digital")) setPower(getPower() - POWER_CHANGE);
     }
 
@@ -74,7 +85,7 @@ public class MotorTestSubsystem implements Subsystem, Loggable {
 
     private void setPower(double d) {
         if (theMotor != null) {
-            theMotor.setSpeed(d);
+            theMotor.setPower(d);
             power = d;
         }
     }
